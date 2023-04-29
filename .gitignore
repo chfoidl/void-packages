@@ -17,6 +17,8 @@
 !/etc
 !/srcpkgs
 !/xbps-src
+!Dockerfile
+!/scripts
 etc/conf
 etc/conf.*
 etc/virtual
