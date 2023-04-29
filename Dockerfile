@@ -20,6 +20,6 @@ RUN cp -R /src-void-packages/srcpkgs/base-files /hostrepo/srcpkgs/base-files
 WORKDIR /hostrepo
 
 # Run binary-bootstrap to make sure we have a working xbps-src.
-RUN ./xbps-src binary-bootstrap
+#RUN ./xbps-src binary-bootstrap
 
 ENTRYPOINT ["/build.sh"]
