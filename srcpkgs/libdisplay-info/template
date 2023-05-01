@@ -1,0 +1,23 @@
+# Template file for 'libdisplay-info'
+pkgname=libdisplay-info
+version=0.1.1
+revision=1
+build_style=meson
+configure_args="-Db_ndebug=false"
+makedepends="hwids pkg-config"
+short_desc="EDID and DisplayID library"
+maintainer="Orphaned <orphan@voidlinux.org>"
+license="MIT"
+homepage="https://gitlab.freedesktop.org/emersion/libdisplay-info"
+distfiles="https://gitlab.freedesktop.org/emersion/libdisplay-info/-/archive/${version}/libdisplay-info-${version}.tar.gz"
+checksum=a5aeef57817916286526292ec816a5338c4d3c0094ce91e584fc82b57070a44f
+
+libdisplay-info-devel_package() {
+  depends="${makedepends} ${sourcepkg}>=${version}_${revision}"
+  short_desc+=" - development files"
+  pkg_install() {
+    vmove usr/include
+		vmove "usr/lib/*.so"
+		vmove usr/lib/pkgconfig
+  }
+}
