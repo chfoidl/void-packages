@@ -1,0 +1,53 @@
+# Template file for 'hyprland'
+pkgname=hyprland
+version=0.24.1
+revision=1
+archs="x86_64*"
+short_desc="Hyprland is a highly customizable dynamic tiling Wayland compositor that doesn't sacrifice on its looks."
+homepage="https://github.com/hyprwm/Hyprland"
+license="BSD-3-Clause"
+hostmakedepends="git make cmake ninja meson gcc gdb pkg-config"
+makedepends="libxcb-devel xcb-util-devel xcb-util-keysyms-devel libXfixes-devel libX11-devel libXcomposite-devel libXrender-devel pixman-devel glslang-devel libinput-devel libxcb-devel libxkbcommon-devel wayland-devel xcb-util-errors-devel xcb-util-renderutil-devel xcb-util-wm-devel Vulkan-Headers libdrm-devel libpng-devel libgbm-devel libseat-devel mesa-dri libgbm-devel MesaLib-devel pango-devel cairo-devel libxcb xcb-proto xcb-util xcb-util-keysyms libXfixes libX11 libXcomposite xinput libXrender pixman wayland-protocols cairo pango polkit glslang libinput libxcb libxkbcommon wayland xcb-util-errors xcb-util-renderutil xcb-util-wm seatd vulkan-loader Vulkan-ValidationLayers xorg-server-xwayland libseat mesa hwids libliftoff-devel libdisplay-info-devel"
+depends="xorg-server-xwayland libliftoff libdisplay-info"
+patch_args="-Np1"
+
+do_fetch() {
+  git clone --branch "v${version}" https://github.com/hyprwm/Hyprland ${wrksrc}
+}
+
+do_build() {
+  git submodule update --init
+
+  # Build wlroots
+  make fixwlr
+  cd ${wrksrc}/subprojects/wlroots
+  meson build/ --prefix=${wrksrc}/tmpwlr
+  ninja -C build/
+  mkdir -p ${wrksrc}/tmpwlr
+  ninja -C build/ install
+
+  # Build udis86
+  cd ${wrksrc}/subprojects/udis86
+  cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -H./ -B./build -G Ninja
+  cmake --build ./build --config Release --target all -j$(nproc)
+
+  # Build Hyprland
+  cd ${wrksrc}
+  make protocols
+  make release
+  cd ./hyprctl
+  make all
+}
+
+do_install() {
+  vbin build/Hyprland 
+  vbin hyprctl/hyprctl 
+
+  vinstall example/hyprland.desktop 644 usr/share/wayland-sessions
+  vinstall example/hyprland.conf 644 usr/share/hyprland
+  vinstall tmpwlr/lib/libwlroots.so.12032 755 usr/lib
+
+  vcopy assets/*.png usr/share/hyprland
+
+  vlicense LICENSE
+}

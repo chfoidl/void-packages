@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index 6bcbbbbd..6b7d337e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -160,7 +160,7 @@ legacyrendererdebug:
+ 	cmake --build ./build --config Release --target all -j$(shell nproc)
+ 
+ release:
+-	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build -G Ninja
++	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DNO_SYSTEMD=true -S . -B ./build -G Ninja
+ 	cmake --build ./build --config Release --target all -j$(shell nproc)
+ 
+ debug:
