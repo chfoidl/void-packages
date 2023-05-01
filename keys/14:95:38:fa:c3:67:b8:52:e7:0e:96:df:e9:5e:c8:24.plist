@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>public-key</key>
+	<data>LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFqYk5LRVhiQU82N3lHRlJKR0pSRQpuM0kwQUZ3MWhTbXo0VlpkalZxOElBWUJaN1VndmsyOVFkdHN2MytOc0MwUnpLWk9VVEk2UFZTa2UyM2krbDNhCndxeVBQK1BvcFhuMEFraCtjRXZ4SmlGV2xFOVNoVERLOW9jWFZ1cHlHVUxKMWxNcllmcGdlT1hhcHBGOXZNNVYKYkdlTzZOajc3aUMvUnpsZHY4T2JwRkt6eHpBc0pnSURDUzBoSVFiMkxRZ1JjUmpmd205bUQ0NkZ6VVBYWEJ0QgpocUE5TWoxVE5YSWhzdkZXS0xXWUhSd3llaEc4TDR2aUIrV3JkTFo4dVlzSWlDVk5XUDBnTlRPK2FRS1ZqSFFhCmZnUnNFYlJmd3VOZ3IvMHlsVk1zNU52T1JFWjVFSkVNWTRUOStmWG1RQUtWbUp0K1JaazFsV0ZkZVVFOE9FN1kKL1FJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==</data>
+	<key>public-key-size</key>
+	<integer>2048</integer>
+	<key>signature-by</key>
+	<string>chfoidl &lt;chfoidl@gmail.com&gt;</string>
+</dict>
+</plist>

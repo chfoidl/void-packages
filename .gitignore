@@ -15,6 +15,7 @@
 !/README.md
 !/common
 !/etc
+!/keys
 !/srcpkgs
 !/xbps-src
 !Dockerfile
