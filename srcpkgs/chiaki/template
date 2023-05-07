@@ -1,0 +1,21 @@
+# Template file for 'chiaki'
+pkgname=chiaki
+version=2.1.1
+revision=1
+build_style=cmake
+short_desc="Free and Open Source PlayStation Remote Play Client"
+hostmakedepends="cmake pkg-config"
+makedepends="cmake gcc python3 ffmpeg-devel python3-protobuf protobuf opus-devel openssl-devel qt5-devel qt5-wayland-devel qt5-multimedia-devel qt5-svg-devel SDL2-devel libevdev-devel"
+depends="qt5 qt5-multimedia"
+license="Unlicensed"
+homepage="https://git.sr.ht/~thestr4ng3r/chiaki"
+distfiles="https://git.sr.ht/~thestr4ng3r/chiaki/refs/download/v${version}/chiaki-v${version}-src.tar.gz"
+checksum="75115a19f197d19fc417e863583681e95e412364427aa394f2c0eded54343710"
+
+do_install() {
+  vlicense LICENSES/AGPL-3.0-only-OpenSSL.txt 
+
+  vbin build/gui/chiaki
+
+  vinstall gui/chiaki.desktop 644 usr/share/applications
+}
