@@ -8,7 +8,6 @@ short_desc="A dotfile manager and templater written in rust"
 homepage="https://github.com/SuperCuber/dotter"
 license="Unlicense"
 makedepends="cargo"
-distfiles="https://gitlab.freedesktop.org/emersion/libdisplay-info/-/archive/${version}/libdisplay-info-${version}.tar.gz"
 distfiles="https://github.com/SuperCuber/dotter/archive/refs/tags/v${version}.tar.gz"
 checksum=fbe0236a555f88646bd1bdcbf3a1e09ba9de557987ead7cbac33d0b946c84ffc
 
