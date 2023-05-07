@@ -1,0 +1,24 @@
+# Template file for 'ddev'
+pkgname=ddev
+#version=1.21.6
+version=1.21.4
+revision=1
+archs="x86_64*"
+short_desc="Docker-based local PHP+Node.js web development environments"
+homepage="https://github.com/ddev/ddev"
+license="Apache-2.0"
+depends="docker"
+distfiles="https://github.com/ddev/ddev/releases/download/v${version}/ddev_linux-amd64.v${version}.tar.gz"
+#checksum=ab5c25159c2bfa2b28305dc8502f538137074e5477cd09ba9d824402283f1213
+checksum=ad092af44560083f2aa39e8cd3795ffbf61e2eafcb4e9c06314e92f9c3314e2c
+
+do_install() {
+  vbin ddev
+  vbin mkcert
+
+	for shell in bash fish zsh; do
+    vcompletion ddev_${shell}_completion.sh ${shell}
+	done
+
+	vlicense LICENSE
+}

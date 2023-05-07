@@ -1,0 +1,9 @@
+YELLOW='\033[33m'
+RESET='\033[0m'
+
+case "$ACTION" in
+post)
+  printf "${YELLOW}Running mkcert -install, which may request your sudo password.'.${RESET}\n"
+  mkcert -install
+	;;
+esac
