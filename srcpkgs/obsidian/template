@@ -1,0 +1,28 @@
+# Template file for 'obsidian'
+pkgname=obsidian
+version=1.2.7
+revision=1
+short_desc="Obsidian is a powerful and extensible knowledge base
+that works on top of your local folder of plain text files."
+maintainer="Orphaned <orphan@voidlinux.org>"
+license="Unlicensed"
+homepage="https://obsidian.md/"
+distfiles="https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/obsidian_${version}_amd64.deb"
+checksum="7794990f3670fbb8029fadf84a731383237592219445daccf060f207793a41ab"
+
+do_install() {
+  if [ -d "/opt/Obsidian" ]; then
+    rm -rf /opt/Obsidian
+  fi
+
+  vmkdir opt/Obsidian
+  vcopy "opt/Obsidian/*" opt/Obsidian
+
+  vinstall usr/share/applications/obsidian.desktop 644 usr/share/applications
+
+  for size in 16 32 48 64 128 256 512; do
+    vinstall "usr/share/icons/hicolor/${size}x${size}/apps/obsidian.png" \
+    644 \
+    usr/share/icons/hicolor/${size}x${size}/apps obsidian.pny
+  done
+}
