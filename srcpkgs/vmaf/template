@@ -1,0 +1,21 @@
+# Template file for 'libliftoff'
+pkgname=vmaf
+version=2.3.1
+revision=1
+build_style=meson
+build_wrksrc="libvmaf"
+makedepends="pkg-config meson gcc ninja nasm"
+short_desc="Perceptual video quality assessment based on multi-method fusion."
+maintainer="Orphaned <orphan@voidlinux.org>"
+license="MIT"
+homepage="https://github.com/Netflix/vmaf"
+distfiles="https://github.com/Netflix/vmaf/archive/refs/tags/v${version}.tar.gz"
+checksum=8d60b1ddab043ada25ff11ced821da6e0c37fd7730dd81c24f1fc12be7293ef2
+
+post_install() {
+	vlicense ../LICENSE
+
+  vbin build/tools/vmafossexec
+
+  vcopy ../model usr/share/vmaf
+}

@@ -1,0 +1,33 @@
+# Template file for 'xdg-desktop-portal-hyprland'
+pkgname=xdg-desktop-portal-hyprland
+version=0.3.1
+revision=1
+archs="x86_64*"
+short_desc="xdg-desktop-portal backend for hyprland"
+homepage="https://github.com/hyprwm/xdg-desktop-portal-hyprland"
+license="MIT"
+hostmakedepends="git meson cmake pkg-config ninja"
+makedepends="pipewire-devel wayland-devel wayland-protocols inih-devel libgbm-devel libdrm-devel libuuid-devel basu-devel qt6-wayland-devel"
+depends="xdg-desktop-portal libpipewire inih wayland libgbm libdrm libuuid basu qt6-wayland"
+
+do_fetch() {
+  git clone --branch "v${version}" https://github.com/hyprwm/xdg-desktop-portal-hyprland ${wrksrc}
+}
+
+do_build() {
+  git submodule update --init
+
+  cd ${wrksrc}
+  meson build --prefix=/usr --libexecdir lib
+	ninja -C build
+	cd hyprland-share-picker && make all && cd ..
+
+  ninja -C build install
+}
+
+do_install() {
+  DESTDIR="${DESTDIR}" ninja -C build install
+
+  vbin hyprland-share-picker/build/hyprland-share-picker
+  vlicense LICENSE
+}

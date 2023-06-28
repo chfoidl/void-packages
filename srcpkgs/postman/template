@@ -1,0 +1,39 @@
+# Template file for 'postman'
+pkgname=postman
+version=10.13.0
+revision=1
+archs="x86_64"
+short_desc="Build, test, and document your APIs faster"
+maintainer="Orphaned <orphan@voidlinux.org>"
+license="custom:Proprietary"
+homepage="https://www.postman.com/"
+distfiles="https://dl.pstmn.io/download/version/${version}/linux_64"
+checksum="cdc52d25d6b1c5529d483a15b224c76aa94224ac3193965d7cfe3aa355a1ee61"
+restricted=yes
+nopie=true
+
+pre_extract() {
+ 	local srcdir="$XBPS_SRCDISTDIR/$pkgname-$version"
+
+  cd $srcdir
+
+  if [ -f linux_64.tar.gz ]; then
+    rm linux_64.tar.gz
+  fi
+
+  mv -f linux_64 linux_64.tar.gz
+  export distfiles="$distfiles.tar.gz"
+}
+
+do_install() {
+  if [ -d "/opt/Postman" ]; then
+    rm -rf /opt/Postman
+  fi
+
+  vmkdir opt/Postman
+  vcopy "*" opt/Postman/
+
+  vinstall ${FILESDIR}/postman.desktop 644 usr/share/applications
+
+  vinstall app/icons/icon_128x128.png 644 usr/share/icons/hicolor/128x128/apps/postman.png
+}

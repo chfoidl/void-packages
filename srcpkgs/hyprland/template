@@ -7,7 +7,7 @@ short_desc="Hyprland is a highly customizable dynamic tiling Wayland compositor 
 homepage="https://github.com/hyprwm/Hyprland"
 license="BSD-3-Clause"
 hostmakedepends="git make cmake ninja meson gcc gdb pkg-config"
-makedepends="libxcb-devel xcb-util-devel xcb-util-keysyms-devel libXfixes-devel libX11-devel libXcomposite-devel libXrender-devel pixman-devel glslang-devel libinput-devel libxcb-devel libxkbcommon-devel wayland-devel xcb-util-errors-devel xcb-util-renderutil-devel xcb-util-wm-devel Vulkan-Headers libdrm-devel libpng-devel libgbm-devel libseat-devel mesa-dri libgbm-devel MesaLib-devel pango-devel cairo-devel libxcb xcb-proto xcb-util xcb-util-keysyms libXfixes libX11 libXcomposite xinput libXrender pixman wayland-protocols cairo pango polkit glslang libinput libxcb libxkbcommon wayland xcb-util-errors xcb-util-renderutil xcb-util-wm seatd vulkan-loader Vulkan-ValidationLayers xorg-server-xwayland libseat mesa hwids libliftoff-devel libdisplay-info-devel"
+makedepends="libxcb-devel xcb-util-devel xcb-util-keysyms-devel libXfixes-devel libX11-devel libXcomposite-devel libXrender-devel pixman-devel glslang-devel libinput-devel libxcb-devel libxkbcommon-devel wayland-devel xcb-util-errors-devel xcb-util-renderutil-devel xcb-util-wm-devel Vulkan-Headers libdrm-devel libpng-devel libgbm-devel libseat-devel mesa-dri libgbm-devel MesaLib-devel pango-devel cairo-devel libxcb xcb-proto xcb-util xcb-util-keysyms libXfixes libX11 libXcomposite xinput libXrender pixman wayland-protocols cairo pango polkit glslang libinput libxcb libxkbcommon wayland xcb-util-errors xcb-util-renderutil xcb-util-wm elogind seatd vulkan-loader Vulkan-ValidationLayers xorg-server-xwayland libseat mesa hwids libliftoff-devel libdisplay-info-devel"
 depends="xorg-server-xwayland libliftoff libdisplay-info"
 patch_args="-Np1"
 
@@ -17,6 +17,9 @@ do_fetch() {
 
 do_build() {
   git submodule update --init
+
+  patch --directory="subprojects/wlroots/" --forward --strip=0 \
+		--input="${FILESDIR}/wlroots-nvidia.patch"
 
   # Build wlroots
   make fixwlr

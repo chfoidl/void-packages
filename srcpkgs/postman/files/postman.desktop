@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Postman
+Exec=/opt/Postman/Postman %U
+Terminal=false
+Type=Application
+Icon=postman
+StartupWMClass=postman
+Comment=Postman
+MimeType=x-scheme-handler/postman;
+Categories=Development;
